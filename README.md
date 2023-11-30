@@ -32,11 +32,10 @@ This example deploys an Azure Virtual Machine.
     Previewing update (dev):
 
      Type                                          Name                   
- +   pulumi:pulumi:Stack                           glingerie-azure-vm-  dev
+ +   pulumi:pulumi:Stack                           pulumi-azure-vm-dev
  +   ├─ azure-native:resources:ResourceGroup       test-rg                
  +   ├─ azure-native:network:VirtualNetwork        test-net               
  +   ├─ azure-native:network:PublicIPAddress       test-ip                
- +   ├─ azure-native:network:NetworkSecurityGroup  test-nsg
  +   ├─ azure-native:network:NetworkInterface      test-nic
  +   └─ azure-native:compute:VirtualMachine        test-vm
 Outputs:
@@ -53,7 +52,6 @@ Resources:
  +   ├─ azure-native:resources:ResourceGroup
  +   ├─ azure-native:network:VirtualNetwork
  +   ├─ azure-native:network:PublicIPAddress
- +   ├─ azure-native:network:NetworkSecurityGro
  +   ├─ azure-native:network:NetworkInterface
  +   └─ azure-native:compute:VirtualMachine
 Outputs:
