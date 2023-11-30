@@ -20,26 +20,6 @@ net = network.VirtualNetwork(
     )]
 )
 
-network_security_group = network.NetworkSecurityGroup(
-    "test-nsg",
-    resource_group_name=resource_group.name,
-    location=resource_group.location,
-)
-
-#network_security_rule = network.NetworkSecurityRule(
-#    "nsgRule",
-#    resource_group_name=resource_group.name,
-#    network_security_group_name=network_security_group.name,
-#    access="Allow",
-#    direction="Inbound",
-#    protocol="Tcp",
-#    source_port_range="*",
-#    destination_port_range="22",  # SSH port
-#    priority=100,
-#    source_address_prefix="*",  # Should be restricted based on your use case
-#    destination_address_prefix="*",
-#)
-
 public_ip = network.PublicIPAddress(
     "test-ip",
     resource_group_name=resource_group.name,
