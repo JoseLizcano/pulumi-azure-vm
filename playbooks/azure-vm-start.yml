@@ -1,0 +1,12 @@
+- name: Start Azure VM
+  hosts: localhost
+  connection: local
+  vars:
+    resource_group_name: test-rg
+    virtual_machine_name: test-vm
+  tasks:
+    - name: Start virtual machine
+      azure_rm_virtualmachine:
+        resource_group: {{ resource_group_name }}
+        name: {{ virtual_machine_name }}
+        started: yes

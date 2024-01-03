@@ -1,4 +1,4 @@
-name: glingerie-azure-vm
+name: pulumi-azure
 runtime:
   name: python
   options:

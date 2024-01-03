@@ -25,6 +25,10 @@ This example deploys an Azure Virtual Machine.
 
     Note that `--secret` ensures your password is encrypted safely.
 
+    $ az login
+    $ az account list
+    $ az account set --subscription=<id>
+
 3. Run `pulumi up` to preview and deploy the changes:
 
     ```

@@ -1,6 +1,7 @@
 import base64
 from pulumi import Config, Output, export, ResourceOptions
 from pulumi_azure_native import compute, network, resources
+import pulumi_command as command
 
 config = Config()
 username = config.require("username")
@@ -42,15 +43,6 @@ sudo apt-get update -y
 echo "Hello, World!" > index.html
 nohup python -m SimpleHTTPServer 80 &"""
 
-#cloud_init_data = """#cloud-config
-#packages:
-#  - slapd
-#  - ldap-utils
-#runcmd:
-#  - DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
-#  # Additional commands to configure slapd can go here
-#"""
-
 vm = compute.VirtualMachine(
     "test-vm",
     opts=ResourceOptions(replace_on_changes=["*"]),
@@ -67,8 +59,7 @@ vm = compute.VirtualMachine(
         computer_name="hostname",
         admin_username=username,
         admin_password=password,
-        #custom_data=cloud_init_data,
-        custom_data=base64.b64encode(init_script.encode("ascii")).decode("ascii"),
+        #custom_data=base64.b64encode(init_script.encode("ascii")).decode("ascii"),
         linux_configuration=compute.LinuxConfigurationArgs(
             disable_password_authentication=False,
         ),
@@ -89,5 +80,11 @@ vm = compute.VirtualMachine(
 public_ip_addr = vm.id.apply(lambda _: network.get_public_ip_address_output(
     public_ip_address_name=public_ip.name,
     resource_group_name=resource_group.name))
+
+# Play the Ansible playbook
+play_ansible_playbook_cmd=command.local.Command("playAnsiblePlaybookCmd",
+    create="playbooks/init-script.yml",
+    opts=ResourceOptions(depends_on=[vm])
+)
 
 export("public_ip", public_ip_addr.ip_address)
