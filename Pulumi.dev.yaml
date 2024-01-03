@@ -2,4 +2,4 @@ config:
   azure-native:location: eastus
   pulumi-azure:password:
     secure: AAABAO2jui9jHDvsrUgHEQ31INyl2mpllvJognfrgwfnGqdrtTVdL91x134Yg4hdRgwkkQ==
-  pulumi-azure:username: glingerie-devops
+  pulumi-azure:username: azure-devops
